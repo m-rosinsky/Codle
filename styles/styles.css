@@ -29,12 +29,13 @@ html, body {
     max-width: 300px;
     min-width: 300px;
     align-items: center;
+    min-height: 300px;
 }
 
 .code-editor {
-    width: 95%;
-    padding: 10px;
-    background-color: #161923;
-    font-family: 'Courier New', 'Courier', 'monospace';
-    color: white;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
