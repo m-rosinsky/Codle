@@ -21,21 +21,85 @@ html, body {
     margin: 10px;
 }
 
-.game-content {
+.game-content, .answer-container {
     display: flex;
     flex-direction: column;
     padding: 10px 0;
     margin: 0 auto;
-    max-width: 300px;
-    min-width: 300px;
-    align-items: center;
-    min-height: 300px;
+    min-width: 250px;
+    max-width: 400px;
+    width: 100%;
+    justify-content: space-between;
+    position: relative;
+}
+
+.game-content label {
+    color: #dddddd;
+    font-family: 'Consolas', 'Arial';
+}
+
+.code-editor-container {
+    position: relative;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.label-box {
+    background-color: #161923;
+    color: #bfbfbf;
+    font-family: 'Consolas', 'Arial';
+    font-size: 16px;
+    width: fit-content;
+    position: relative;
+    padding: 5px 10px;
 }
 
 .code-editor {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    width: 95%;
+    padding: 10px;
+    min-height: 75px;
+    font-size: 15px;
+}
+
+.divider {
+    width: 100%;
+    height: 1px;
+    padding: 0;
+    margin: 0;
+    background-color: #dddddd;
+    margin: 10px 0;
+}
+
+.answer-container > label {
+    margin: 0 auto;
+}
+
+.answer-container > textarea {
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+    background-color: #2c2c2c;
+    color: #dddddd;
+    font-family: 'Consolas', 'Arial';
+    border-style: solid;
+    border-color: #8d8d8d;
+    resize: none;
+}
+
+.guess-circles {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.guess-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: 0 5px;
+    background-color: #6fd45a;
+}
+
+.guess-circle.incorrect {
+    background-color: #444;
 }

@@ -1,6 +1,17 @@
-window.onload = function() {
-    const problem_code = "print('hello world!')"
-    const content_div = document.getElementById("code-editor");
+// JavaScript code to handle guess count and circle coloring
+let remainingGuesses = 3; // Set initial remaining guesses
 
-    content_div.innerText = problem_code;
+function updateGuessesRemaining() {
+    const circles = document.querySelectorAll('.guess-circles .guess-circle');
+    circles.forEach((circle, index) => {
+        if (index >= remainingGuesses) {
+            circle.classList.add('incorrect');
+        } else {
+            circle.classList.remove('incorrect');
+        }
+    });
 }
+
+// Example usage to update remaining guesses
+// Call this function whenever a guess is made or when the game state changes
+updateGuessesRemaining();
