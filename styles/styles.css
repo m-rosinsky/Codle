@@ -85,6 +85,7 @@ html, body {
     border-style: solid;
     border-color: #8d8d8d;
     resize: none;
+    transition: transform 0.2s ease;
 }
 
 #answer-submit {
@@ -114,8 +115,33 @@ html, body {
     border-radius: 50%;
     margin: 0 5px;
     background-color: #6fd45a;
+    transition: background-color 0.5s ease;
 }
 
 .guess-circle.incorrect {
     background-color: #444;
+}
+
+.animation {
+    animation: colorChange 0.5s forwards;
+}
+
+@keyframes colorChange {
+    from {
+        background-color: #6fd45a;
+    } to {
+        background-color: #444444;
+    }
+}
+
+.shake-animation {
+    animation: shake 0.2s ease;
+}
+
+@keyframes shake {
+    0%      { transform: translateX(0); }
+    25%     { transform: translateX(-5px); }
+    50%     { transform: translateX(5px); }
+    75%     { transform: translateX(-5px); }
+    100%    { transform: translateX(0); }
 }

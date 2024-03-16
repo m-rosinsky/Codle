@@ -6,7 +6,7 @@ let problemCode = "for i in range(5):\n\tprint(i, end='')";
 let problemAnswer = "01234";
 
 // Set initial remaining guesses
-let remainingGuesses = 3;
+let remainingGuesses = 5;
 let maxGuesses = 5;
 
 let gameOver = false;
@@ -31,34 +31,39 @@ function update_editor() {
 }
 
 function submitAnswer() {
-    if (gameOver) { return; }
-    let answer = document.getElementById('answer-ta').value;
-    if (answer === problemAnswer) {
-        alert("Correct");
-        return;
-    }
+    if (remainingGuesses <= 0) { return; }
     remainingGuesses--;
     updateGuessesRemaining();
-    if (remainingGuesses === 0) {
-        alert("Loser u suck");
-        gameOver = true;
-    }
+    shakeAnswerBox();
 }
 
 function updateGuessesRemaining() {
-    const circleParent = document.querySelector('.guess-circles');
-    circleParent.innerHTML = '';
-    for (let i = 0; i < maxGuesses; i++)
-    {
-        const newCircle = document.createElement('div');
-        newCircle.classList.add('guess-circle');
+    const guessCirclesContainer = document.querySelector('.guess-circles');
+    guessCirclesContainer.innerHTML = ''; // Clear previous circles
+
+    for (let i = 0; i < maxGuesses; i++) {
+        const circle = document.createElement('div');
+        circle.classList.add('guess-circle');
+
         if (i >= remainingGuesses) {
-            newCircle.classList.add('incorrect');
-        } else {
-            newCircle.classList.remove('incorrect');
+            circle.classList.add('incorrect');
+            if (i === remainingGuesses) {
+                circle.classList.add('animation');
+            }
         }
-        circleParent.appendChild(newCircle);
+
+        guessCirclesContainer.appendChild(circle);
     }
+}
+
+
+
+function shakeAnswerBox() {
+    const answerBox = document.getElementById("answer-ta");
+    answerBox.classList.add('shake-animation');
+    setTimeout(() => {
+        answerBox.classList.remove('shake-animation');
+    }, 200);
 }
 
 updateGuessesRemaining();
