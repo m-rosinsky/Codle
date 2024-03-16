@@ -8,13 +8,21 @@
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
+    <script>
+        document.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                document.getElementById("answer-submit").click();
+            }
+        });
+    </script>
     <div class="top-bar">
         <h1 id="header-title">Codle</h1>
     </div>
 
     <div class="game-content">
         <div class="code-editor-container">
-            <div class="label-box">Python3</div>
+            <div id="label-box">Python3</div>
             <div class="code-editor" id="code-editor">
                 <!-- Code problem rendered here -->
             </div>
@@ -24,27 +32,18 @@
 
         <div class="answer-container">
             <label>What is the output of this program:</label>
-            <div style="margin: 0 auto;">
-            </div>
-            <textarea class="answer-ta" style="margin-top: 5px;"></textarea>
+            <textarea class="answer-ta" id="answer-ta" style="margin-top: 5px;"></textarea>
+            <button id="answer-submit" onclick="submitAnswer()">Submit Answer</button>
             <div class="guess-circles">
+                <!-- <div class="guess-circle"></div>
                 <div class="guess-circle"></div>
-                <div class="guess-circle"></div>
-                <div class="guess-circle"></div>
+                <div class="guess-circle"></div> -->
             </div>
             <label style="color: #bbbbbb;">Guesses Remaining</label>
         </div>
     </div>
 
     <script src="scripts/ace.js" type="text/javascript" charset="utf-8"></script>
-    <script>
-        var editor = ace.edit("code-editor");
-        editor.setTheme("ace/theme/tomorrow_night");
-        editor.session.setMode("ace/mode/python");
-        editor.setValue("for i in range(5):\n\tprint(i)");
-        editor.setReadOnly(true);
-        editor.gotoLine(100);
-    </script>
     <script src="scripts/game.js"></script>
 </body>
 </html>

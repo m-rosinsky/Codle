@@ -45,7 +45,7 @@ html, body {
     margin-right: 5px;
 }
 
-.label-box {
+#label-box {
     background-color: #161923;
     color: #bfbfbf;
     font-family: 'Consolas', 'Arial';
@@ -85,6 +85,21 @@ html, body {
     border-style: solid;
     border-color: #8d8d8d;
     resize: none;
+}
+
+#answer-submit {
+    margin: 10px auto;
+    min-width: 30%;
+    min-height: 30px;
+    background-color: #187429;
+    color: #dddddd;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#answer-submit:hover {
+    background-color: #144f1f;
 }
 
 .guess-circles {
