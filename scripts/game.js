@@ -36,7 +36,7 @@ function submitAnswer() {
     // Check if the answer is correct.
     let ans = document.getElementById('answer-ta').value.trim();
     if (ans === problemAnswer) {
-        alert('nice!');
+        startConfetti();
         handleGameOver();
         return;
     }
