@@ -31,8 +31,21 @@ function update_editor() {
 }
 
 function submitAnswer() {
-    if (remainingGuesses <= 0) { return; }
+    if (gameOver) { return; }
+
+    // Check if the answer is correct.
+    let ans = document.getElementById('answer-ta').value.trim();
+    if (ans === problemAnswer) {
+        alert('nice!');
+        handleGameOver();
+        return;
+    }
+
+    // Answer is wrong.
     remainingGuesses--;
+    if (remainingGuesses === 0) {
+        handleGameOver();
+    }
     updateGuessesRemaining();
     shakeAnswerBox();
 }
@@ -47,8 +60,9 @@ function updateGuessesRemaining() {
 
         if (i >= remainingGuesses) {
             circle.classList.add('incorrect');
+            // Only animate the current guess.
             if (i === remainingGuesses) {
-                circle.classList.add('animation');
+                circle.classList.add('incorrect-animation');
             }
         }
 
@@ -56,7 +70,8 @@ function updateGuessesRemaining() {
     }
 }
 
-
+// Do this at the start.
+updateGuessesRemaining();
 
 function shakeAnswerBox() {
     const answerBox = document.getElementById("answer-ta");
@@ -66,4 +81,10 @@ function shakeAnswerBox() {
     }, 200);
 }
 
-updateGuessesRemaining();
+function handleGameOver() {
+    gameOver = true;
+    // Gray out the submit button.
+    const submitBtn = document.getElementById('answer-submit');
+    submitBtn.style.backgroundColor = '#444444';
+    submitBtn.style.cursor = 'default';
+}

@@ -103,10 +103,16 @@ html, body {
     background-color: #144f1f;
 }
 
+.deactivated {
+    background-color: #444444;
+    cursor: default;
+}
+
 .guess-circles {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .guess-circle {
@@ -122,7 +128,7 @@ html, body {
     background-color: #444;
 }
 
-.animation {
+.incorrect-animation {
     animation: colorChange 0.5s forwards;
 }
 
