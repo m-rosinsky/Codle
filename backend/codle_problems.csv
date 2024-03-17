@@ -1,0 +1,3 @@
+lang,problem,answer
+python3,"for i in range(5):\n\tprint(i, end='')",01234
+cpp,"#include <iostream>\n\nint main() {\n\tint x = 5;\n\tint y = 2;\n\tstd::cout << ""x / y = "" << x / y << std::endl;\n\treturn 0;\n}",hi
