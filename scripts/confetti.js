@@ -41,12 +41,11 @@ var removeConfetti; //call to stop the confetti animation and remove all confett
 				};
 		})();
 		var canvas = document.getElementById("confetti-canvas");
-		var topBar = document.getElementById("top-bar");
 		if (canvas === null) {
 			canvas = document.createElement("canvas");
 			canvas.setAttribute("id", "confetti-canvas");
-			canvas.setAttribute("style", "display:block;z-index:99999;pointer-events:none;");
-			topBar.appendChild(canvas);
+			canvas.setAttribute("style", "position: fixed; top: 0; left: 0; pointer-events: none; z-index: 999999;");
+			document.body.appendChild(canvas);
 			canvas.width = width;
 			canvas.height = height;
 			window.addEventListener("resize", function() {
