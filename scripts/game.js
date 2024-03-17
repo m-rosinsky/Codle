@@ -29,25 +29,26 @@ function resetGameState() {
     if (!savedLastAccessedDate || isNewDay(savedLastAccessedDate)) {
         localStorage.clear(); // Clear local storage
         localStorage.setItem('lastAccessedDate', new Date().toString()); // Store current date
-    } else {
-        // Retrieve game state from Local Storage
-        const savedRemainingGuesses = localStorage.getItem('remainingGuesses');
-        if (savedRemainingGuesses !== null) {
-            remainingGuesses = parseInt(savedRemainingGuesses);
-            updateGuessesRemaining();
-        }
+        return;
+    }
+    
+    // Retrieve game state from Local Storage
+    const savedRemainingGuesses = localStorage.getItem('remainingGuesses');
+    if (savedRemainingGuesses !== null) {
+        remainingGuesses = parseInt(savedRemainingGuesses);
+        updateGuessesRemaining();
+    }
 
-        const savedPlayerWin = localStorage.getItem('playerWin');
-        if (savedPlayerWin !== null) {
-            playerWin = JSON.parse(savedPlayerWin);
-        }
+    const savedPlayerWin = localStorage.getItem('playerWin');
+    if (savedPlayerWin !== null) {
+        playerWin = JSON.parse(savedPlayerWin);
+    }
 
-        const savedGameOver = localStorage.getItem('gameOver');
-        if (savedGameOver !== null) {
-            gameOver = JSON.parse(savedGameOver);
-            if (gameOver) {
-                handleGameOver();
-            }
+    const savedGameOver = localStorage.getItem('gameOver');
+    if (savedGameOver !== null) {
+        gameOver = JSON.parse(savedGameOver);
+        if (gameOver) {
+            handleGameOver();
         }
     }
 }
