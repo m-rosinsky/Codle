@@ -10,43 +10,62 @@ let maxGuesses = 5;
 let gameOver = false;
 let playerWin = false;
 
-const langMap = {};
-langMap['python3'] = 'python';
+const langMap = {
+    'python3': 'python'
+};
 
-update_editor();
+updateEditor();
 
 window.onload = function() {
-    // Retreive guesses from local storage.
-    const savedGuesses = localStorage.getItem('remainingGuesses');
-    if (savedGuesses !== null) {
-        remainingGuesses = parseInt(savedGuesses);
-        updateGuessesRemaining();
-    }
-
-    // Retreive playerWin from local storage.
-    const savedPlayerWin = localStorage.getItem('playerWin');
-    if (savedPlayerWin !== null) {
-        playerWin = JSON.parse(savedPlayerWin);
-    }
-
-    // Retrieve gameOver from local storage.
-    const savedGameover = localStorage.getItem('gameOver');
-    if (savedGameover !== null) {
-        gameOver = JSON.parse(savedGameover);
-        if (gameOver === true) {
-            handleGameOver();
-        }
-    }
-
+    // Retrieve game state from local storage or reset if it's a new day
+    resetGameState();
 }
 
-function update_editor() {
-    // Update the language label.
-    let langLabel = document.getElementById('label-box');
+function resetGameState() {
+    // Retrieve the last accessed date from Local Storage
+    const savedLastAccessedDate = localStorage.getItem('lastAccessedDate');
+
+    // If there's no saved date or if it's a new day, reset the game state
+    if (!savedLastAccessedDate || isNewDay(savedLastAccessedDate)) {
+        localStorage.clear(); // Clear local storage
+        localStorage.setItem('lastAccessedDate', new Date().toString()); // Store current date
+    } else {
+        // Retrieve game state from Local Storage
+        const savedRemainingGuesses = localStorage.getItem('remainingGuesses');
+        if (savedRemainingGuesses !== null) {
+            remainingGuesses = parseInt(savedRemainingGuesses);
+            updateGuessesRemaining();
+        }
+
+        const savedPlayerWin = localStorage.getItem('playerWin');
+        if (savedPlayerWin !== null) {
+            playerWin = JSON.parse(savedPlayerWin);
+        }
+
+        const savedGameOver = localStorage.getItem('gameOver');
+        if (savedGameOver !== null) {
+            gameOver = JSON.parse(savedGameOver);
+            if (gameOver) {
+                handleGameOver();
+            }
+        }
+    }
+}
+
+// Function to check if it's a new day
+function isNewDay(savedDate) {
+    const currentDate = new Date();
+    const savedDateObj = new Date(savedDate);
+    return currentDate.toDateString() !== savedDateObj.toDateString();
+}
+
+function updateEditor() {
+    // Update the language label
+    const langLabel = document.getElementById('label-box');
     langLabel.innerText = problemLanguage;
 
-    let editorDiv = document.getElementById('code-editor');
-    var editor = ace.edit(editorDiv);
+    const editorDiv = document.getElementById('code-editor');
+    const editor = ace.edit(editorDiv);
     editor.setTheme("ace/theme/tomorrow_night");
     editor.session.setMode("ace/mode/" + langMap[problemLanguage]);
     editor.setValue(problemCode);
@@ -57,9 +76,9 @@ function update_editor() {
 function submitAnswer() {
     if (gameOver) { return; }
 
-    // Check if the answer is correct.
+    // Check if the answer is correct
     const ansContainer = document.getElementById('answer-ta');
-    let ans = ansContainer.value.trim();
+    const ans = ansContainer.value.trim();
     if (ans.length === 0) {
         ansContainer.style.borderColor = "#880000";
         return;
@@ -74,7 +93,7 @@ function submitAnswer() {
         return;
     }
 
-    // Answer is wrong.
+    // Answer is wrong
     remainingGuesses--;
     if (remainingGuesses === 0) {
         handleGameOver();
@@ -82,7 +101,7 @@ function submitAnswer() {
     updateGuessesRemaining();
     shakeAnswerBox();
 
-    // Handle local storage.
+    // Update local storage
     localStorage.setItem('remainingGuesses', remainingGuesses);
 }
 
@@ -96,7 +115,6 @@ function updateGuessesRemaining() {
 
         if (i >= remainingGuesses) {
             circle.classList.add('incorrect');
-            // Only animate the current guess.
             if (i === remainingGuesses) {
                 circle.classList.add('incorrect-animation');
             }
@@ -106,7 +124,7 @@ function updateGuessesRemaining() {
     }
 }
 
-// Do this at the start.
+// Do this at the start
 updateGuessesRemaining();
 
 function shakeAnswerBox() {
@@ -119,17 +137,18 @@ function shakeAnswerBox() {
 
 function handleGameOver() {
     gameOver = true;
-    // Gray out the submit button.
+
+    // Gray out the submit button
     const submitBtn = document.getElementById('answer-submit');
     submitBtn.style.backgroundColor = '#444444';
     submitBtn.style.cursor = 'default';
 
-    // Store gameOver in local storage
+    // Store game over in local storage
     localStorage.setItem('gameOver', JSON.stringify(gameOver));
 
-    // If the player one, respond accordingly.
+    // If the player won, respond accordingly
     const ansContainer = document.getElementById('answer-ta');
-    if (playerWin === true) {
+    if (playerWin) {
         ansContainer.style.borderColor = "#6fd45a";
         localStorage.setItem('playerWin', JSON.stringify(playerWin));
         document.getElementById('win-report').innerText = "You solved today's puzzle!";
