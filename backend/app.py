@@ -14,9 +14,11 @@ import sys
 from datetime import datetime
 
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from waitress import serve
 
 app = Flask(__name__)
+CORS(app)
 
 PROBLEM_CSV_FILE = 'codle_problems.csv'
 
