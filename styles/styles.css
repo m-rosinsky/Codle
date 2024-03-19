@@ -61,6 +61,17 @@ html, body {
     padding: 10px;
     min-height: 75px;
     font-size: 15px;
+
+    /* Flexbox styles */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Align vertically */
+}
+
+.code-editor > p {
+    color: #ffffff;
+    font-family: 'Consolas', 'Arial';
+    margin: 0; /* Remove default margin */
 }
 
 .divider {
@@ -152,6 +163,24 @@ html, body {
     75%     { transform: translateX(-5px); }
     100%    { transform: translateX(0); }
 }
+
+.loading-animation {
+    border: 4px solid #69696a;
+    border-left-color: #161923;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 
 footer {
     position: fixed;

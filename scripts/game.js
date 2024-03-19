@@ -1,7 +1,7 @@
-// Perform an API call.
-let problemLanguage = "python3";
-let problemCode = "for i in range(5):\n\tprint(i, end='')";
-let problemAnswer = "01234";
+// Problem set.
+let problemLanguage = "";
+let problemCode = "";
+let problemAnswer = "";
 
 // Set initial remaining guesses
 let remainingGuesses = 5;
@@ -11,10 +11,9 @@ let gameOver = false;
 let playerWin = false;
 
 const langMap = {
-    'python3': 'python'
+    'python3': 'python',
+    'cpp': 'c_cpp'
 };
-
-updateEditor();
 
 window.onload = function() {
     // Retrieve game state from local storage or reset if it's a new day
@@ -29,6 +28,7 @@ function resetGameState() {
     if (!savedLastAccessedDate || isNewDay(savedLastAccessedDate)) {
         localStorage.clear(); // Clear local storage
         localStorage.setItem('lastAccessedDate', new Date().toString()); // Store current date
+        getProblemAPI(); // perform the API call for today's problem.
         return;
     }
     
@@ -51,6 +51,64 @@ function resetGameState() {
             handleGameOver();
         }
     }
+
+    const savedProblemLanguage = localStorage.getItem('problemLanguage');
+    const savedProblemCode = localStorage.getItem('problemCode');
+    const savedProblemAnswer = localStorage.getItem('problemAnswer');
+    if ((savedProblemLanguage !== null) &&
+        (savedProblemCode !== null) &&
+        (savedProblemAnswer !== null)) {
+        problemLanguage = savedProblemLanguage;
+        problemCode = savedProblemCode;
+        problemAnswer = savedProblemAnswer;
+        updateEditor();
+    } else {
+        getProblemAPI();
+    }
+}
+
+function getProblemAPI() {
+    const xhr = new XMLHttpRequest();
+    const xhr_url = 'http://localhost:5000';
+    xhr.open('POST', xhr_url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    // Add loading animation.
+    const editorDiv = document.getElementById('code-editor');
+    editorDiv.innerHTML = '<div class="loading-animation"></div>';
+
+    xhr.onload = function() {
+        // Remove loading animation.
+        editorDiv.innerHTML = '';
+
+        if (xhr.status !== 200) {
+            alert('Failed to fetch problem from API server.');
+            return;
+        }
+        const responseData = JSON.parse(xhr.responseText);
+        
+        problemLanguage = responseData.lang;
+        problemCode = responseData.problem;
+        problemAnswer = responseData.answer;
+
+        problemCode = problemCode.replace(/\\n/g, '\n');
+        problemCode = problemCode.replace(/\\t/g, '\t');
+        
+        // Set local storage.
+        localStorage.setItem('problemLanguage', problemLanguage);
+        localStorage.setItem('problemCode', problemCode);
+        localStorage.setItem('problemAnswer', problemAnswer);
+
+        // Refresh the editor.
+        updateEditor();
+    };
+    xhr.onerror = function() {
+        // Remove loading animation.
+        editorDiv.innerHTML = '';
+
+        editorDiv.innerHTML = '<p>🚨Error loading today\'s problem🚨</p>';
+    };
+    xhr.send();
 }
 
 // Function to check if it's a new day
@@ -81,6 +139,7 @@ function submitAnswer() {
     const ansContainer = document.getElementById('answer-ta');
     const ans = ansContainer.value.trim();
     if (ans.length === 0) {
+        shakeAnswerBox();
         ansContainer.style.borderColor = "#880000";
         return;
     }
