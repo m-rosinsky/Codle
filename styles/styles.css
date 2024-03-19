@@ -61,8 +61,6 @@ html, body {
     padding: 10px;
     min-height: 75px;
     font-size: 15px;
-
-    /* Flexbox styles */
     display: flex;
     justify-content: center;
     align-items: center; /* Align vertically */
