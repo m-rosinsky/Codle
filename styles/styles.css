@@ -59,7 +59,7 @@ html, body {
 .code-editor {
     width: 95%;
     padding: 10px;
-    min-height: 75px;
+    min-height: 125px;
     font-size: 15px;
     display: flex;
     justify-content: center;
@@ -102,7 +102,6 @@ html, body {
     margin: 10px auto;
     min-width: 30%;
     min-height: 30px;
-    background-color: #187429;
     color: #dddddd;
     border: none;
     border-radius: 5px;
@@ -178,7 +177,6 @@ html, body {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-
 
 footer {
     position: fixed;

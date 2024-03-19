@@ -21,6 +21,9 @@ window.onload = function() {
 }
 
 function resetGameState() {
+    // Render guesses.
+    updateGuessesRemaining();
+
     // Retrieve the last accessed date from Local Storage
     const savedLastAccessedDate = localStorage.getItem('lastAccessedDate');
 
@@ -81,6 +84,10 @@ function getProblemAPI() {
         // Remove loading animation.
         editorDiv.innerHTML = '';
 
+        // Activate button.
+        const submitBtn = document.getElementById('answer-submit');
+        submitBtn.style.backgroundColor = '#187429';
+
         if (xhr.status !== 200) {
             alert('Failed to fetch problem from API server.');
             return;
@@ -123,6 +130,7 @@ function updateEditor() {
     const langLabel = document.getElementById('label-box');
     langLabel.innerText = problemLanguage;
 
+    // Set the editor fields.
     const editorDiv = document.getElementById('code-editor');
     const editor = ace.edit(editorDiv);
     editor.setTheme("ace/theme/tomorrow_night");
@@ -130,6 +138,10 @@ function updateEditor() {
     editor.setValue(problemCode);
     editor.setReadOnly(true);
     editor.gotoLine(100);
+
+    // Activate submit button.
+    const submitBtn = document.getElementById('answer-submit');
+    submitBtn.style.backgroundColor = '#187429';
 }
 
 function submitAnswer() {
@@ -179,13 +191,9 @@ function updateGuessesRemaining() {
                 circle.classList.add('incorrect-animation');
             }
         }
-
         guessCirclesContainer.appendChild(circle);
     }
 }
-
-// Do this at the start
-updateGuessesRemaining();
 
 function shakeAnswerBox() {
     const answerBox = document.getElementById("answer-ta");
@@ -198,22 +206,35 @@ function shakeAnswerBox() {
 function handleGameOver() {
     gameOver = true;
 
-    // Gray out the submit button
-    const submitBtn = document.getElementById('answer-submit');
-    submitBtn.style.backgroundColor = '#444444';
-    submitBtn.style.cursor = 'default';
-
     // Store game over in local storage
     localStorage.setItem('gameOver', JSON.stringify(gameOver));
 
     // If the player won, respond accordingly
     const ansContainer = document.getElementById('answer-ta');
+    const submitBtn = document.getElementById('answer-submit');
+
+    ansContainer.readOnly = true;
+
     if (playerWin) {
+        // Deactivate submit button.
+        submitBtn.style.backgroundColor = '#444444';
+        submitBtn.style.cursor = 'default';
+
         ansContainer.style.borderColor = "#6fd45a";
         localStorage.setItem('playerWin', JSON.stringify(playerWin));
         document.getElementById('win-report').innerText = "You solved today's puzzle!";
     } else {
         document.getElementById('win-report').innerText = "Try again tomorrow!";
         ansContainer.style.borderColor = "#880000";
+
+        // Transform the submit button to reveal answer button.
+        submitBtn.style.backgroundColor = '#6c5ce7';
+        submitBtn.innerText = 'Reveal Answer';
+        submitBtn.onclick = function() {
+            ansContainer.value = problemAnswer;
+            submitBtn.style.backgroundColor = '#444444';
+            submitBtn.style.cursor = 'default';
+            ansContainer.style.borderColor = '#6c5ce7';
+        }
     }
 }
