@@ -12,7 +12,8 @@ let playerWin = false;
 
 const langMap = {
     'python3': 'python',
-    'cpp': 'c_cpp'
+    'cpp': 'c_cpp',
+    'javascript': 'javascript'
 };
 
 window.onload = function() {
