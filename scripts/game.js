@@ -73,7 +73,7 @@ function resetGameState() {
 
 function getProblemAPI() {
     const xhr = new XMLHttpRequest();
-    const xhr_url = 'http://localhost:5000';
+    const xhr_url = 'https://backend-app-qpw4zikeqa-uc.a.run.app';
     xhr.open('POST', xhr_url, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
 

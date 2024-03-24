@@ -15,6 +15,7 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app/
 
 COPY ./app.py .
+COPY ./codle_problems.csv .
 
 EXPOSE 8080
 
