@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN python3 -m pip install \
     flask \
+    flask-cors \
     waitress
 
 RUN mkdir -p /usr/src
