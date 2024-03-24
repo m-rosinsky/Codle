@@ -1,0 +1,191 @@
+html, body {
+    background-color: #212530;
+    margin: 0;
+    padding: 0;
+    /* overflow: hidden; */
+}
+
+.top-bar {
+    display: flex;
+    background-color: #161923;
+    color: #ecf0f1;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    margin-bottom: 50px;
+}
+
+.top-bar > h1 {
+    font-family: 'Courier New', 'Courier', 'monospace';
+    align-items: center;
+    font-size: 35px;
+    margin: 10px;
+}
+
+.game-content, .answer-container {
+    background-color: #2c313b;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+    margin: 0 auto;
+    min-width: 250px;
+    max-width: 400px;
+    width: 100%;
+    justify-content: space-between;
+    position: relative;
+}
+
+.game-content label {
+    color: #dddddd;
+    font-family: 'Consolas', 'Arial';
+}
+
+.code-editor-container {
+    position: relative;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#label-box {
+    background-color: #161923;
+    color: #bfbfbf;
+    font-family: 'Consolas', 'Arial';
+    font-size: 16px;
+    width: fit-content;
+    position: relative;
+    padding: 5px 10px;
+}
+
+.code-editor {
+    width: 95%;
+    padding: 10px;
+    min-height: 125px;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Align vertically */
+}
+
+.code-editor > p {
+    color: #ffffff;
+    font-family: 'Consolas', 'Arial';
+    margin: 0; /* Remove default margin */
+}
+
+.divider {
+    width: 100%;
+    height: 1px;
+    padding: 0;
+    margin: 0;
+    background-color: #dddddd;
+    margin: 10px 0;
+}
+
+.answer-container > label {
+    margin: 0 auto;
+}
+
+.answer-container > textarea {
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+    background-color: #2c2c2c;
+    color: #dddddd;
+    font-family: 'Consolas', 'Arial';
+    border-style: solid;
+    border-color: #8d8d8d;
+    resize: none;
+    transition: transform 0.2s ease;
+}
+
+#answer-submit {
+    margin: 10px auto;
+    min-width: 30%;
+    min-height: 30px;
+    color: #dddddd;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#answer-submit:hover {
+    background-color: #144f1f;
+}
+
+.deactivated {
+    background-color: #444444;
+    cursor: default;
+}
+
+.guess-circles {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.guess-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: 0 5px;
+    background-color: #6fd45a;
+    transition: background-color 0.5s ease;
+}
+
+.guess-circle.incorrect {
+    background-color: #444;
+}
+
+.incorrect-animation {
+    animation: colorChange 0.5s forwards;
+}
+
+@keyframes colorChange {
+    from {
+        background-color: #6fd45a;
+    } to {
+        background-color: #444444;
+    }
+}
+
+.shake-animation {
+    animation: shake 0.2s ease;
+}
+
+@keyframes shake {
+    0%      { transform: translateX(0); }
+    25%     { transform: translateX(-5px); }
+    50%     { transform: translateX(5px); }
+    75%     { transform: translateX(-5px); }
+    100%    { transform: translateX(0); }
+}
+
+.loading-animation {
+    border: 4px solid #69696a;
+    border-left-color: #161923;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #161923;
+    color: #959595;
+    text-align: center;
+    font-size: 12px;
+    font-family: 'Consolas', 'Arial';
+    padding: 2px 0;
+}

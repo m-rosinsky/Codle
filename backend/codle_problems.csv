@@ -1,0 +1,30 @@
+lang,problem,answer
+python3,"for i in range(5):\n    print(i, end='')",01234
+python3,a = 5\ndef f():\n    a = 4\nf()\nprint(a),5
+python3,a = 4.5\nb = 2\nprint(a//b),2.0
+python3,f1 = lambda q: q * 3\nf2 = lambda q: q + 5\nx = f1(f2(f1(2)))\nprint(x),33
+python3,"x = True\ny = False\nif not print(x, end=' '):\n    print(y)",True False
+python3,count = 1\ndef f():\n    global count\n    count = 2\nf()\nprint(count),2
+python3,"class C:\n    def __init__(self, i):\n        self.i = i\n        i = 555\n        \nc = C(111)\nprint(c.i)",111
+python3,"a = [1,2,3,4,5]\nfor i in range(1,-2,-1):\n    print(a[i], end='')",215
+python3,"s = {}\nn = [1,2,3,2,3,4]\nfor i in n:\n    s[i] = 0\nprint(len(s))",4
+python3,"class C:\n    def __init__(self, i):\n        self.i = i\nc = C(50)\nc.__dict__['j'] = 51\nprint(c.j + len(c.__dict__))",53
+python3,"names = ['Adam', 'Bob', 'Charlie']\nfor i in names[::-1]:\n    print(i[-1], end='')",ebm
+python3,"n = [1,2,3]\ntry:\n    print(n[3], end='')\nexcept IndexError:\n    print(n[1], end='')\nfinally:\n    print(n[2], end='')",23
+python3,"m = [1,2,3]\nn = [4,5,6]\n\nm.append(n)\nprint(len(m))",4
+python3,a = 1\ndef f(a):\n    a += 1\nprint(f(a)),None
+python3,"n = [1,2,3]\ndef f(n):\n    n += [4]\nf(n)\nprint(len(n))",4
+python3,"def f(n):\n    """"""return n^2""""""\n    return n*n\nprint(f.__doc__[0:6])",return
+python3,"class A(object):\n    val = 1\n\nclass B(A):\n    pass\n\nA.val = 3\nprint(f""{A.val} {B.val}"")",3 3
+python3,n = 'x'\nm = ord('x')\nprint(chr(m) == n),True
+python3,"n1 = [5,4,3,2,1]\nn2 = [1,2,3,4,5]\nfor i in n2:\n    n1.remove(i)\nprint(n1)",[]
+python3,n = [2]*-1\nprint(n),[]
+cpp,class C {\n    static uint32_t i;\n    uint32_t j;\n};\n\nint main() {\n    std::cout << sizeof(C);\n},4
+cpp,"int main()\n{\n\tint array[] = { 10, 20, 30 };\n\tcout << -2[array];\n}",-30
+javascript,"let x = ""5"";\nlet y = 2;\n\nconsole.log((x + y), (x - y));",52 3
+javascript,"let x = ""hello"";\nlet y = new String(""hello"");\n\nconsole.log((x == y), (x === y));",true false
+javascript,let x = [];\nlet y = [];\nlet z = x + y;\n\nconsole.log(typeof z);,string
+javascript,"let x = 1;\nlet y = ""1"";\n\nconsole.log(++x, ++y);",2 2
+javascript,"let x = ""b"";\nlet y = ""a"";\n\nconsole.log(x + y + + y + y);",baNaNa
+javascript,"let x = 0;\nlet y = ""0"";\nlet z = [];\n\n// lol js.\nconsole.log(x==y,x==z,y==z);",true true false
+javascript,"let x = [1,2,3];\n\nconsole.log(typeof x);",object

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Codle - by Mike Rosinsky</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+    <!-- <script>
+        document.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                document.getElementById("answer-submit").click();
+            }
+        });
+    </script> -->
+    <div class="top-bar">
+        <h1 id="header-title">Codle</h1>
+    </div>
+
+    <div class="game-content">
+        <div class="code-editor-container" id="code-editor-container">
+            <div id="label-box"></div>
+            <div class="code-editor" id="code-editor">
+                <!-- Code problem rendered here -->
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+
+        <div class="answer-container">
+            <label>What is the output of this program:</label>
+            <textarea class="answer-ta" id="answer-ta" style="margin-top: 5px;"></textarea>
+            <button id="answer-submit" onclick="submitAnswer()" style="background-color: #444444;">Submit Answer</button>
+            <label id="win-report"></label>
+            <div class="guess-circles">
+                <!-- Circles are dynamically added here. -->
+            </div>
+            <label style="color: #bbbbbb;">Guesses Remaining</label>
+        </div>
+    </div>
+
+    <footer>
+        <p>Copyright (c) 2024 Mike Rosinsky</p>
+    </footer>
+
+    <script src="scripts/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="scripts/game.js" type="text/javascript" charset="utf-8"></script>
+    <script src="scripts/confetti.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>
